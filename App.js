@@ -6,6 +6,7 @@ import { StatusBar } from 'react-native';
 
 import WelcomeScreen from './Screen/Welcome';
 import LoginScreen from './Screen/Login';
+import Signup from './Screen/SignUp';
 
 export default function App() {
 
@@ -31,6 +32,14 @@ export default function App() {
           options = {{
             headerShown: false
           }}
+        />
+        <Stack.Screen
+          name="userSignupScreen"
+          component={Signup}
+          options={{
+            headerShown: false,
+            // title : 'Register' 
+          }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
