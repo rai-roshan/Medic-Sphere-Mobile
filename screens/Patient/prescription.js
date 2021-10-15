@@ -1,7 +1,8 @@
 import React from 'react';
 import {View,  StyleSheet, ScrollView } from "react-native";
-import PrescriptionCard from '../../Components/Patient/PrescriptionCard';
-import PrescriptionDetails from '../../Components/Patient/PrescriptionDetails';
+
+import PrescriptionCard from '../../components/Patient/PrescriptionCard';
+import PrescriptionDetails from "../../components/Patient/PrescriptionDetails";
 
 export default function Prescription({ navigation }) {
 
