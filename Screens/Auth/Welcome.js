@@ -1,7 +1,7 @@
 import React , { useEffect } from "react";
 import {View , Text , Image  , StyleSheet } from "react-native";
 
-import Loader from '../assets/loading.gif'
+import Loader from '../../assets/loading.gif'
 
 const DELAY_TIME = 3000;
 
