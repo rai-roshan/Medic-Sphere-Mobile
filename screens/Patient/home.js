@@ -1,9 +1,9 @@
 import React from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableOpacity, StatusBar} from 'react-native';
 import { Button } from 'react-native-paper';
-import PreviewCard from '../../components/Patient/PrescriptionCard';
+import PreviewCard from '../../Components/Patient/PrescriptionCard';
 
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from '../../Context/AuthContext';
 
 export default function PatientHome({ navigation }) {
 

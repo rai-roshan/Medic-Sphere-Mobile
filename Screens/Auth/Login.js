@@ -2,7 +2,7 @@ import React , { useState } from "react";
 import { Text , View , StyleSheet } from "react-native";
 import { TextInput , Button , Avatar } from 'react-native-paper';
 
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function LoginScreen({ navigation }) {
 

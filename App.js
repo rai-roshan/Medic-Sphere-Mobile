@@ -10,7 +10,7 @@ import WelcomeScreen from './Screens/Auth/Welcome';
 import LoginScreen from './Screens/Auth/Login';
 import Signup from './Screens/Auth/SignUp';
 
-import { AuthContext } from './Screens/Context/AuthContext';
+import { AuthContext } from './Context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
