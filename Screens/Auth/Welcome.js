@@ -3,13 +3,16 @@ import {View , Text , Image  , StyleSheet } from "react-native";
 
 import Loader from '../../assets/loading.gif'
 
-const DELAY_TIME = 3000;
+const DELAY_TIME = 5000;
 
 export default function WelcomeScreen({ navigation }) {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('userLoginScreen');
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'userLoginScreen' }]
+            });
         }, DELAY_TIME);
     },[]);
 
