@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 
-import WelcomeScreen from './Screen/Welcome';
-import LoginScreen from './Screen/Login';
-import Signup from './Screen/SignUp';
+import WelcomeScreen from './Screens/Auth/Welcome';
+import LoginScreen from './Screens/Auth/Login';
+import Signup from './Screens/Auth/SignUp';
 
 export default function App() {
 
