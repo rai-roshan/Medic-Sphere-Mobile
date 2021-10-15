@@ -3,7 +3,7 @@ import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PatientHome from './home';
 import Prescription from "./prescription";
-import AllPrescription from './allPrescription';
+import AllPrescription from './listPrescriptions';
 
 export default function PatientStackNavigation() {
     const Stack = createNativeStackNavigator();

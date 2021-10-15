@@ -40,7 +40,7 @@ export default function PatientHome({ navigation }) {
                 contentStyle={{marginVertical: 10}}
                 color="#60c1eb" 
                 mode="contained" 
-                onPress={() => console.log('Pressed')}>
+                onPress={ () => { navigation.navigate('AllPrescription');} }>
                     Bookmarked
                 </Button>
                 <Button 
