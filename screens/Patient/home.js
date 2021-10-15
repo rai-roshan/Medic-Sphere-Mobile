@@ -1,7 +1,7 @@
 import React from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableOpacity} from 'react-native';
 import { Button } from 'react-native-paper';
-import PreviewCard from "../../components/Patient/PrescriptionCard";
+import PreviewCard from "../../Components/Patient/PrescriptionCard";
 
 export default function PatientHome({ navigation }) {
 
