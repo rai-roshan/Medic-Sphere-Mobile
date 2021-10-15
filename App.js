@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import PatientStackNavigation from './Screens/Patient/stackNav';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,35 +15,44 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <StatusBar
-        animated={true}
-        backgroundColor="black"
-      />
-      <Stack.Navigator initialRouteName = 'userWelcomeScreen'>
-        <Stack.Screen 
-          name = 'userWelcomeScreen'
-          component = {WelcomeScreen}
-          options={{
-            headerShown: false
-          }}
+    <PaperProvider>
+      <NavigationContainer>
+        <StatusBar
+          animated={true}
+          backgroundColor="black"
         />
-        <Stack.Screen 
-          name = 'userLoginScreen'
-          component = {LoginScreen}
-          options = {{
-            headerShown: false
-          }}
-        />
-        <Stack.Screen
-          name="userSignupScreen"
-          component={Signup}
-          options={{
-            headerShown: false,
-            // title : 'Register' 
-          }} 
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Navigator initialRouteName = 'userWelcomeScreen'>
+          <Stack.Screen 
+            name = 'userWelcomeScreen'
+            component = {WelcomeScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen 
+            name = 'userLoginScreen'
+            component = {LoginScreen}
+            options = {{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="userSignupScreen"
+            component={Signup}
+            options={{
+              headerShown: false,
+              // title : 'Register' 
+            }} 
+          />
+          <Stack.Screen
+            name="PatientStackNav"
+            component={PatientStackNavigation}
+            options={{
+              headerShown: false 
+            }} 
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
