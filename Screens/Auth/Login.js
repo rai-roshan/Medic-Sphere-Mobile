@@ -2,15 +2,18 @@ import React , { useState } from "react";
 import { Text , View , StyleSheet } from "react-native";
 import { TextInput , Button , Avatar } from 'react-native-paper';
 
+import { AuthContext } from "../Context/AuthContext";
+
 export default function LoginScreen({ navigation }) {
 
     const [healthId , setHealthId] = useState('');
     const [password , setPassword] = useState('');
     const [loader , setLoader] = useState(false);
+    const { signIn } = React.useContext(AuthContext);
 
-    const handleSignUpPress = () => {
+    const handleSignInPress = () => {
         setLoader(true);
-        navigation.navigate("PatientStackNav");
+        signIn(healthId , password);
     }
 
     return(
@@ -52,7 +55,7 @@ export default function LoginScreen({ navigation }) {
                         mode="contained"
                         loading = {loader}
                         style = {{ marginTop: 20}}
-                        onPress = {() => handleSignUpPress()}
+                        onPress = {() => handleSignInPress()}
                     >
                         Sign In
                     </Button>
