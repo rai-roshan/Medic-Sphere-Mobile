@@ -1,5 +1,5 @@
 import React from "react";
-import {View, StyleSheet, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, ScrollView, TouchableOpacity, StatusBar} from 'react-native';
 import { Button } from 'react-native-paper';
 import PreviewCard from "../../Components/Patient/PrescriptionCard";
 
@@ -7,7 +7,10 @@ export default function PatientHome({ navigation }) {
 
     return (
         <View style={styles.container}>
-            
+            <StatusBar
+            animated={true}
+            backgroundColor="#34c778"
+            />
             <View style={ styles.latestCard }>
                 <Text style={styles.title}>
                     Latest Prescriptions

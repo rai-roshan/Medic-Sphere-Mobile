@@ -10,6 +10,7 @@ export default function LoginScreen({ navigation }) {
 
     const handleSignUpPress = () => {
         setLoader(true);
+        navigation.navigate("PatientStackNav");
     }
 
     return(

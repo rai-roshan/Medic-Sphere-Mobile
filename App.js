@@ -45,11 +45,10 @@ export default function App() {
             }} 
           />
           <Stack.Screen
-            name="PatientNavStack"
+            name="PatientStackNav"
             component={PatientStackNavigation}
             options={{
-              headerShown: false,
-              title : 'Patient Home' 
+              headerShown: false 
             }} 
           />
         </Stack.Navigator>
