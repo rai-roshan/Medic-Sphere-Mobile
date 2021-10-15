@@ -12,6 +12,7 @@ export default function LoginScreen({ navigation }) {
     const { signIn } = React.useContext(AuthContext);
 
     const handleSignInPress = () => {
+        setLoader(true);
         signIn(healthId , password);
     }
 

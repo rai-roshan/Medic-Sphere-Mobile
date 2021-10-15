@@ -1,9 +1,10 @@
 import React , { useEffect, useMemo, useReducer } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import PatientStackNavigation from './Screens/Patient/stackNav';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar , ActivityIndicator , View, Text } from 'react-native';
-import { Button } from 'react-native-paper';
 
 import WelcomeScreen from './Screens/Auth/Welcome';
 import LoginScreen from './Screens/Auth/Login';
@@ -108,8 +109,8 @@ export default function App() {
           animated={true}
           backgroundColor="black"
         />
-        { 
-          loginState.userToken === null ? (
+        {
+          loginState.userToken ===  null ? (
             <Stack.Navigator initialRouteName = 'userWelcomeScreen'>
               <Stack.Screen 
                 name = 'userWelcomeScreen'
@@ -129,27 +130,25 @@ export default function App() {
                 name="userSignupScreen"
                 component={Signup}
                 options={{
-                  headerShown: false,
-                  // title : 'Register' 
+                  headerShown: false, 
                 }} 
               />
             </Stack.Navigator>
+          ) : (
+            <PaperProvider>
+                <Stack.Navigator initialRouteName = 'PatientStackNav'>
+                  <Stack.Screen
+                    name="PatientStackNav"
+                    component={PatientStackNavigation}
+                    options={{
+                      headerShown: false 
+                    }} 
+                  />
+                </Stack.Navigator>
+            </PaperProvider>
           )
-          :
-          (
-            <Button
-              onPress = { async() => {
-                try {
-                  await AsyncStorage.removeItem('userToken');
-                } catch(err) {
-                  console.log(err);
-                }
-              }}
-            > Log Out </Button>
-          )
-        } 
-        
+        }
       </NavigationContainer>
     </AuthContext.Provider>
-  );
+  )
 }
