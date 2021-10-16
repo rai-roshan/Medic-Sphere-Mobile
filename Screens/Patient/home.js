@@ -1,10 +1,13 @@
 import React from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableOpacity, StatusBar} from 'react-native';
 import { Button } from 'react-native-paper';
-import PreviewCard from "../../Components/Patient/PrescriptionCard";
+import PreviewCard from '../../Components/Patient/PrescriptionCard';
+
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function PatientHome({ navigation }) {
 
+    const { signOut } = React.useContext(AuthContext);
     return (
         <View style={styles.container}>
             <StatusBar
@@ -53,7 +56,14 @@ export default function PatientHome({ navigation }) {
                     ALL
                 </Button> 
             </View>
-
+ 
+            <Button
+                style={ styles.m10 }
+                onPress = {() => signOut()}
+            >
+                Log out TempoRary   
+            </Button>
+            
             <View style={ styles.secondaryPartition}>
 
             </View>
