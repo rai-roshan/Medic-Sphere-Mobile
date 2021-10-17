@@ -66,8 +66,8 @@ export default function App() {
         } catch(e) {
           console.log(e);
         }
+        dispatch({ type: 'LOGIN' , id: healthId , token: userToken});
       }
-      dispatch({ type: 'LOGIN' , id: healthId , token: userToken})
     },
     signOut: async () => {
       try {
