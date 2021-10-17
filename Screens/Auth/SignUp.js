@@ -19,8 +19,8 @@ export default function Signup({ navigation }) {
 
     return(
         <Surface style = {styles.container}>
-            <Text style={{textAlign: 'center' , fontSize: 30 , marginTop: 5 , marginBottom: 10}}> Register </Text>
             <View style = {styles.innerContainer}>
+            <Text style={{textAlign: 'center' , fontSize: 30 , marginTop: 10 , marginBottom: 10}}> Register </Text>
                 <TextInput 
                     label="Full Name" 
                     mode="outlined" 
@@ -82,14 +82,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         flexDirection: 'column',
-        backgroundColor: 'white'
+        backgroundColor: '#00CED1'
     },
     innerContainer: {
         alignSelf: 'center',
         backgroundColor: '#f7f7f7',
         width: '95%',
         height: '90%',
-        // elevation: 1,
-        flexDirection: 'column'
+        elevation: 5,
+        flexDirection: 'column',
+        borderRadius: 10
     }
 })
