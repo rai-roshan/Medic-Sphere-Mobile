@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, FlatList, TouchableOpacity, Pressable, Button } from 'react-native'
-//import CompactCard from '../../Components/Patient/CompactCard';
 import { Button as PaperButton } from 'react-native-paper';
-import { FontAwesome, Ionicons, Foundation } from '@expo/vector-icons';
+import { FontAwesome, Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
 import FlatListItem from '../../Components/Patient/ListItem';
+
 const dummyData = [...Array(15).keys()].map((v, k)=>({
     id: 'key'+k,
     dr_name: "Dr xyz khanra",
@@ -11,21 +11,35 @@ const dummyData = [...Array(15).keys()].map((v, k)=>({
     hospital_name: "Hospital Name"
 }));
 
-const RightHeaderButtons = ()=>(
+// options for long press multi select
+const RightHeaderButtons = ({ folder })=>(
     <View style={{flexDirection: "row"}}>
-        <PaperButton 
-        icon={()=>( <Foundation name="folder-add" size={24} color="black" /> ) } 
-        mode="text"  
-        onPress={()=>{ console.log("folder"); }} />
-        <PaperButton 
-        icon={()=>( <FontAwesome name="star" size={24} color="black" /> ) } 
-        mode="text"  
-        onPress={()=>{ console.log("star"); }} />
+        { folder ? <TouchableOpacity
+        style={{marginRight: 10}}
+        onPress={ ()=>{console.log("remove from folder");} }>
+            <MaterialCommunityIcons 
+            name="folder-remove" 
+            size={24} 
+            color="black" />
+        </TouchableOpacity> :
+        <>
+            <TouchableOpacity 
+            style={{marginRight: 20}} 
+            onPress={()=>{console.log("add to folder"); }}>
+                <Foundation name="folder-add" size={24} color="black" /> 
+            </TouchableOpacity >
+            <TouchableOpacity 
+            style={{marginRight: 10}}
+            onPress={()=>{ console.log("star"); }}>
+                <FontAwesome name="star" size={24} color="black" />
+            </TouchableOpacity>
+        </>
+        }
     </View>
 )
 
 
-export default function AllPrescription({navigation}) {
+export default function AllPrescription({navigation, route}) {
     const [selectedItems, setSelectedItems] = useState([]); //kep only ids
     
     const handleLongPress = (item)=>{
@@ -62,7 +76,7 @@ export default function AllPrescription({navigation}) {
             {
                 title: "",
                 headerRight: ()=>(
-                    <RightHeaderButtons />
+                    <RightHeaderButtons folder={route.params.folder} />
                 )
             } 
         );
@@ -70,7 +84,6 @@ export default function AllPrescription({navigation}) {
 
     return (
         <Pressable onPress={ deSelect } style={styles.container} >
-            {/* <Button title="change header" onPress={ multiSelectOptions } /> */}
             <FlatList
             showsVerticalScrollIndicator={false}
             data={ dummyData }

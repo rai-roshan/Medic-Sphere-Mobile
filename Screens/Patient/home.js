@@ -43,7 +43,9 @@ export default function PatientHome({ navigation }) {
                 contentStyle={{marginVertical: 10}}
                 color="#60c1eb" 
                 mode="contained" 
-                onPress={ () => { navigation.navigate('AllPrescription');} }>
+                onPress={ () => { navigation.navigate('AllPrescription', {
+                    folder: true
+                });} }>
                     Bookmarked
                 </Button>
                 <Button 
@@ -52,7 +54,9 @@ export default function PatientHome({ navigation }) {
                 contentStyle={{marginVertical: 10}} 
                 color="#f7f7f7" 
                 mode="contained" 
-                onPress={() => { navigation.navigate('AllPrescription'); }}>
+                onPress={() => { navigation.navigate('AllPrescription', {
+                    folder: false
+                }); }}>
                     ALL
                 </Button> 
             </View>
