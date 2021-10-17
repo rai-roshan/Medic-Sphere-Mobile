@@ -1,10 +1,26 @@
 import React, {useLayoutEffect} from "react";
-import {View, StyleSheet, Text, ScrollView, TouchableOpacity, StatusBar} from 'react-native';
+import {View, 
+    StyleSheet, 
+    Text, 
+    ScrollView, 
+    TouchableOpacity, 
+    StatusBar, 
+    FlatList } from 'react-native';
 import { Button } from 'react-native-paper';
-import PreviewCard from '../../Components/Patient/PrescriptionCard';
 import { FontAwesome5 } from '@expo/vector-icons';
+import PreviewCard from '../../Components/Patient/PrescriptionCard';
+import Folder from "../../Components/Patient/Folder";
 
 import { AuthContext } from "../../Context/AuthContext";
+
+
+
+const dummyData = [...Array(15).keys()].map((v, k)=>({
+    id: 'key'+k,
+    dr_name: "Dr xyz khanra",
+    date: "dd|mm|yyyy",
+    hospital_name: "Hospital Name"
+}));
 
 export default function PatientHome({ navigation }) {
 
@@ -71,17 +87,35 @@ export default function PatientHome({ navigation }) {
                     ALL
                 </Button> 
             </View>
- 
-            <Button
+            
+            <View style={styles.folderSection}>
+                <Text style={styles.title}>
+                    Folders
+                </Text>
+                <View style={styles.folderContainer}>
+                <FlatList
+                showsVerticalScrollIndicator={false}
+                data={dummyData}
+                renderItem={ ({item})=>(
+                    <TouchableOpacity 
+                    style={{margin: 10}}
+                    onPress={()=>{ navigation.navigate('AllPrescription', {
+                        folder: true } ); }} >
+                        <Folder/>
+                    </TouchableOpacity>
+                 ) }
+                numColumns={2}
+                keyExtractor={(item)=>(item.id)}>
+                </FlatList>
+                </View>
+            </View>
+
+            {/* <Button
                 style={ styles.m10 }
                 onPress = {() => signOut()}
             >
                 Log out TempoRary   
-            </Button>
-            
-            <View style={ styles.secondaryPartition}>
-
-            </View>
+            </Button> */}
         </View>
     );
 }
@@ -108,5 +142,15 @@ const styles = StyleSheet.create({
     },
     secondaryPartition: {
         flex: 2
+    },
+    folderContainer: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "flex-end"
+    },
+    folderSection: {
+        flex: 2,
+        margin: 10,
+        marginBottom: 20
     }
 })

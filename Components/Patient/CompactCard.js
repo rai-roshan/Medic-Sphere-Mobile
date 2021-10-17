@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
 import { Card } from 'react-native-paper';
 
-export default function CompactCard({ backgroundColor }) {
+export default function CompactCard({ backgroundColor="#ebebeb" }) {
     const screenWidth = Dimensions.get("window").width;
     return (
         <Card style={ { width: screenWidth-20 } }>
@@ -24,10 +24,7 @@ export default function CompactCard({ backgroundColor }) {
 
 const styles = StyleSheet.create({
     cardContent: {
-        // flex: 1,
         margin: 5,
-        //backgroundColor: backgroundColor,
-        //backgroundColor: "#ebebeb",
         minWidth: 90
     },
     previewCardTitle: {
