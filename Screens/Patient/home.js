@@ -1,13 +1,24 @@
-import React from "react";
+import React, {useLayoutEffect} from "react";
 import {View, StyleSheet, Text, ScrollView, TouchableOpacity, StatusBar} from 'react-native';
 import { Button } from 'react-native-paper';
 import PreviewCard from '../../Components/Patient/PrescriptionCard';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import { AuthContext } from "../../Context/AuthContext";
 
 export default function PatientHome({ navigation }) {
 
     const { signOut } = React.useContext(AuthContext);
+    useLayoutEffect(()=>{
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity onPress={()=>{ navigation.navigate('PatientProfile'); }}>
+                    <FontAwesome5 name="user-alt" size={24} color="black" />
+                </TouchableOpacity>
+            )
+        });
+    },[navigation]);
+
     return (
         <View style={styles.container}>
             <StatusBar
