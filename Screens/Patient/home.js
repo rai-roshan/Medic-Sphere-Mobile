@@ -36,20 +36,34 @@ export default function PatientHome({ navigation }) {
                 </View>     
             </View>
 
-            <Button 
-            icon="bookmark" 
-            style={ styles.m10 } 
-            color="#60c1eb" 
-            mode="contained" 
-            onPress={() => console.log('Pressed')}>
-                Bookmarked
-            </Button> 
+            <View style={{ flexDirection: "row" }}>
+                <Button 
+                icon="star" 
+                style={ {...styles.m10, flex: 1} } 
+                contentStyle={{marginVertical: 10}}
+                color="#60c1eb" 
+                mode="contained" 
+                onPress={ () => { navigation.navigate('AllPrescription');} }>
+                    Bookmarked
+                </Button>
+                <Button 
+                icon="format-list-text" 
+                style={ {...styles.m10, flex: 1 } }
+                contentStyle={{marginVertical: 10}} 
+                color="#f7f7f7" 
+                mode="contained" 
+                onPress={() => { navigation.navigate('AllPrescription'); }}>
+                    ALL
+                </Button> 
+            </View>
+ 
             <Button
                 style={ styles.m10 }
                 onPress = {() => signOut()}
             >
                 Log out TempoRary   
             </Button>
+            
             <View style={ styles.secondaryPartition}>
 
             </View>
