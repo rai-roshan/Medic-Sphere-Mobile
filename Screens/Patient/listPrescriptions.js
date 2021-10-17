@@ -1,28 +1,28 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, FlatList, TouchableOpacity, Pressable } from 'react-native'
-import PreviewPrescription from '../../Components/Patient/PrescriptionCard';
-import CompactCard from '../../Components/Patient/CompactCard';
-
+import {StyleSheet, View, FlatList, TouchableOpacity, Pressable, Button } from 'react-native'
+//import CompactCard from '../../Components/Patient/CompactCard';
+import { Button as PaperButton } from 'react-native-paper';
+import { FontAwesome, Ionicons, Foundation } from '@expo/vector-icons';
+import FlatListItem from '../../Components/Patient/ListItem';
 const dummyData = [...Array(15).keys()].map((v, k)=>({
     id: 'key'+k,
     dr_name: "Dr xyz khanra",
     date: "dd|mm|yyyy",
     hospital_name: "Hospital Name"
 }));
-//"#cfcfcf" "#8c8c8c"
-const FlatListItem = ({ item, handleLongPress, handleOnPress, isSelected }) => (<TouchableOpacity 
-        onPress={  ()=>{ handleOnPress(item); } }
-        onLongPress={ ()=>{ handleLongPress(item); } }>
-        { isSelected(item) ? <View style={ { marginBottom: 5 } }>
-                <CompactCard 
-                backgroundColor="#b0b0b0" /> 
-            </View> :
-            <View style={ { marginBottom: 5 } }>
-                <CompactCard 
-                backgroundColor="#e6e6e6"  />
-            </View> 
-        }
-    </TouchableOpacity>);
+
+const RightHeaderButtons = ()=>(
+    <View style={{flexDirection: "row"}}>
+        <PaperButton 
+        icon={()=>( <Foundation name="folder-add" size={24} color="black" /> ) } 
+        mode="text"  
+        onPress={()=>{ console.log("folder"); }} />
+        <PaperButton 
+        icon={()=>( <FontAwesome name="star" size={24} color="black" /> ) } 
+        mode="text"  
+        onPress={()=>{ console.log("star"); }} />
+    </View>
+)
 
 
 export default function AllPrescription({navigation}) {
@@ -30,6 +30,7 @@ export default function AllPrescription({navigation}) {
     
     const handleLongPress = (item)=>{
         selectItems(item);
+        multiSelectOptions();
     };
     const selectItems = (item) => {
         //deselect
@@ -55,9 +56,21 @@ export default function AllPrescription({navigation}) {
     const deSelect = () => {
         console.log("deslect op[tion");
         setSelectedItems([]);
-    }
+    };
+    const multiSelectOptions = () => {
+        navigation.setOptions(
+            {
+                title: "",
+                headerRight: ()=>(
+                    <RightHeaderButtons />
+                )
+            } 
+        );
+    };
+
     return (
         <Pressable onPress={ deSelect } style={styles.container} >
+            {/* <Button title="change header" onPress={ multiSelectOptions } /> */}
             <FlatList
             showsVerticalScrollIndicator={false}
             data={ dummyData }
