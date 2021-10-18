@@ -1,4 +1,4 @@
-import React , { useEffect, useMemo, useReducer } from 'react';
+import React , { useEffect, useMemo, useReducer} from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import PatientStackNavigation from './Screens/Patient/stackNav';
 
@@ -66,7 +66,7 @@ export default function App() {
         } catch(e) {
           console.log(e);
         }
-        dispatch({ type: 'LOGIN' , id: healthId , token: userToken});
+        dispatch({ type: 'LOGIN' , id: healthId , token: userToken });
       }
     },
     signOut: async () => {
