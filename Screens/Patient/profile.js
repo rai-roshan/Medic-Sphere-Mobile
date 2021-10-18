@@ -1,16 +1,55 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import {View, Text , StyleSheet , Image} from 'react-native';
 
 import { List , Divider } from 'react-native-paper';
 import { AuthContext } from '../../Context/AuthContext';
+import SkeletonContent from 'react-native-skeleton-content';
+
+const LOADING_TIME = 2000;
 
 export default function Profile() {
 
     const [expanded, setExpanded] = React.useState(false);
+    const [open , setOpen] = React.useState(false);
     const handlePress = () => setExpanded(!expanded);
+
+    const [isLoading , setIsLoading] = React.useState(true);
 
     const { signOut } = React.useContext(AuthContext);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        } , LOADING_TIME)
+    } , []);
+
+    if( isLoading ) {
+        return(
+            <SkeletonContent
+                containerStyle={{ flex: 1 , 
+                    alignSelf: 'center' , 
+                    height: '80%' , 
+                    width: '95%' , 
+                    padding: 20, 
+                    alignItems: 'center',
+                    elevation: 2,
+                    margin: 20,
+                    backgroundColor: '#f7f7f7'
+                }}
+                isLoading={isLoading}
+                layout={[
+                    { key: 'someId', width: 120, height: 120, marginBottom: 20 , borderRadius: 150},
+                    { key: 'somed', width: '95%', height: 30, marginBottom: 20 },
+                    { key: 'someOherId', width: '95%', height: 30, marginBottom: 20 },
+                    { key: 'someOtherId', width: '35%', height: 30, marginBottom: 20 }
+                ]}
+                animationType="shiver"
+                >
+                <Text style={styles.normalText}>Your content</Text>
+                <Text style={styles.bigText}>Other content</Text>
+            </SkeletonContent>
+        )
+    }
     return (
         <View style = {styles.container}>
             <View style = {styles.AvatarContainer}>
@@ -31,11 +70,18 @@ export default function Profile() {
                     <List.Subheader> 1234ABXDY </List.Subheader>
                 </List.Accordion>
                 <Divider/>
-                <List.Item
+                <List.Accordion
                     title = "Personal Details"
                     left={props => <List.Icon {...props} icon="account-details-outline"/>}
-                    right={props => <List.Icon {...props} icon="chevron-right"/>}
-                />
+                    expanded={open}
+                    onPress={() => setOpen(!open)}
+                >
+                    <View>
+                        <List.Subheader style = {{ marginTop: -20}}> Name: Roshan Rai </List.Subheader>
+                        <List.Subheader style = {{ marginTop: -20}}> Age: 22 </List.Subheader>
+                        <List.Subheader style = {{ marginTop: -20}}> Contact Details: +918745 / rrai@gmail.com</List.Subheader>
+                    </View>
+                </List.Accordion>
                 <List.Item
                     title="Settings"
                     left={props => <List.Icon {...props} icon="cogs"/>}

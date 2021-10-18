@@ -14,6 +14,7 @@ export default function LoginScreen({ navigation }) {
     const handleSignInPress = () => {
         setLoader(true);
         signIn(healthId , password);
+        setLoader(false);
     }
 
     return(
@@ -24,7 +25,7 @@ export default function LoginScreen({ navigation }) {
                         fontSize: 35
                     }}
                 > Medic Sphere </Text>
-                <View style = {{width: '100%' , flexDirection: 'row' , justifyContent: 'center' , marginTop: 10}}>
+                {/* <View style = {{width: '100%' , flexDirection: 'row' , justifyContent: 'center' , marginTop: 10}}>
                     <Avatar.Icon size={50} icon="google" style = {{marginRight: 10}}/>
                     <Avatar.Icon size={50} icon="facebook" style = {{marginLeft: 10}}/>
                 </View>
@@ -34,7 +35,7 @@ export default function LoginScreen({ navigation }) {
                         <Text style={{width: 50, textAlign: 'center'}}> OR </Text>
                     </View>
                     <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-                </View>
+                </View> */}
                 <View style = {{ width: '100%' , marginTop: 20}}>
                     <TextInput 
                         label="Health Id"
