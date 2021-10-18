@@ -71,14 +71,6 @@ export default function PatientHome({ navigation }) {
                     ALL
                 </Button> 
             </View>
- 
-            <Button
-                style={ styles.m10 }
-                onPress = {() => signOut()}
-            >
-                Log out TempoRary   
-            </Button>
-            
             <View style={ styles.secondaryPartition}>
 
             </View>

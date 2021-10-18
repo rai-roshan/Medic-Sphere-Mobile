@@ -60,11 +60,11 @@ export default function LoginScreen({ navigation }) {
                         Sign In
                     </Button>
                 </View>
-                <View style = {{marginTop: 10}}>
+                <View>
                     <Button
                         color = "black"
                         onPress = {() => navigation.navigate('userSignupScreen')}
-                    >New User? Sign Up</Button>
+                    ><Text style = {{ fontSize: 10}}>New User? Sign Up</Text></Button>
                 </View>
             </View>
         </View>
@@ -73,7 +73,7 @@ export default function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor : 'white',
+        backgroundColor : '#00CED1',
         flex: 1,
         justifyContent: 'center'
     },
@@ -83,7 +83,9 @@ const styles = StyleSheet.create({
         width: '95%',
         height: '90%',
         alignItems: 'center',
-        padding: 20,
-        flexDirection: 'column'
+        padding: 10,
+        flexDirection: 'column',
+        elevation: 5,
+        borderRadius: 10
     }
 })
