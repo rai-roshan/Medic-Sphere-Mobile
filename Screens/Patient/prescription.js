@@ -4,7 +4,7 @@ import {View,  StyleSheet, ScrollView } from "react-native";
 import PrescriptionCard from '../../Components/Patient/PrescriptionCard';
 import PrescriptionDetails from "../../Components/Patient/PrescriptionDetails";
 
-export default function Prescription({ navigation }) {
+export default function Prescription({ navigation, route }) {
 
     return (
         <View style={ {...styles.container, alignItems: "center" } }>
@@ -12,8 +12,10 @@ export default function Prescription({ navigation }) {
                 <ScrollView 
                 horizontal={true}
                 pagingEnabled={true}>
-                    <PrescriptionCard/>
-                    <PrescriptionDetails/>
+                    <PrescriptionCard 
+                    data={route.params} />
+                    <PrescriptionDetails
+                    data={route.params} />
                 </ScrollView>
             </View>
         </View>

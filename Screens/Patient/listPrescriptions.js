@@ -6,9 +6,16 @@ import FlatListItem from '../../Components/Patient/ListItem';
 
 const dummyData = [...Array(15).keys()].map((v, k)=>({
     id: 'key'+k,
-    dr_name: "Dr xyz khanra",
-    date: "dd|mm|yyyy",
-    hospital_name: "Hospital Name"
+    drName: "Kurnal khanra",
+    date: "22|09|2021",
+    hospitalName: "Hospital Xavier Pvt",
+    presecriptionData : [
+        "some medicine A",
+        "lizid L",
+        "Pills 64x",
+        "Table zoom",
+        "some medice B"
+    ]
 }));
 
 // options for long press multi select
@@ -111,7 +118,7 @@ export default function AllPrescription({navigation, route}) {
             selectItems(item);
         }
         else{
-            navigation.navigate('PatientPrescrition');
+            navigation.navigate('PatientPrescrition', item);
         }
     };
     const isSelected = (item) => (
@@ -141,16 +148,17 @@ export default function AllPrescription({navigation, route}) {
     return (
         <Pressable onPress={ deSelect } style={styles.container} >
             { route.params.folder ? <ConfirmModal 
-            visible={visible}
-            hideModal={hideModal}
-            text={"These Items will be removed"}
-            handleModal={handleModal}
-            /> : <FolderModal 
-            visible={visible} 
-            hideModal={hideModal} 
-            text={text} 
-            handleText={handleText}
-            handleModal={handleModal}/> }
+                visible={visible}
+                hideModal={hideModal}
+                text={"These Items will be removed"}
+                handleModal={handleModal}
+                /> : <FolderModal 
+                visible={visible} 
+                hideModal={hideModal} 
+                text={text} 
+                handleText={handleText}
+                handleModal={handleModal}/> 
+            }
             <FlatList
             showsVerticalScrollIndicator={false}
             data={ dummyData }
