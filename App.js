@@ -1,4 +1,4 @@
-import React , { useEffect, useMemo, useReducer } from 'react';
+import React , { useEffect, useMemo, useReducer} from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import PatientStackNavigation from './Screens/Patient/stackNav';
 
@@ -61,12 +61,13 @@ export default function App() {
       let userToken = null;
       if( healthId === '1234' && password === '1234') {
         userToken = 'abcdef';
+        setLoginStatus(true);
         try {
           await AsyncStorage.setItem('userToken' , userToken);
         } catch(e) {
           console.log(e);
         }
-        dispatch({ type: 'LOGIN' , id: healthId , token: userToken});
+        dispatch({ type: 'LOGIN' , id: healthId , token: userToken });
       }
     },
     signOut: async () => {

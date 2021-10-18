@@ -34,6 +34,13 @@ export default function Signup({ navigation }) {
                     keyboardType="number-pad"
                     onChangeText={text => setANumber(text)}
                 />
+                <TextInput 
+                    label="Email" 
+                    mode="outlined" 
+                    style = {{ margin: 5, marginLeft: 10 , marginRight : 10}} 
+                    keyboardType="email-address"
+                    onChangeText={text => setANumber(text)}
+                />
                 <View style = {{flexDirection: 'row'}}>
                     <TextInput 
                         mode="outlined" 
@@ -64,14 +71,14 @@ export default function Signup({ navigation }) {
                     onPress={() => handleRegister()}
                     loading = {loader}
                 > Register </Button>
-                <View style = {{flexDirection: 'row' , alignItems: 'center' , margin: 10 , marginTop:15}}>
+                {/* <View style = {{flexDirection: 'row' , alignItems: 'center' , margin: 10 , marginTop:15}}>
                     <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
                     <View>
                         <Text style={{width: 50, textAlign: 'center'}}> OR </Text>
                     </View>
                     <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
                 </View>
-                <Button mode="outlined" icon="google" style={{margin:5, marginLeft: 10 , marginRight : 10}}> Sign Up With Google </Button>
+                <Button mode="outlined" icon="google" style={{margin:5, marginLeft: 10 , marginRight : 10}}> Sign Up With Google </Button> */}
             </View>
         </Surface>
     )
