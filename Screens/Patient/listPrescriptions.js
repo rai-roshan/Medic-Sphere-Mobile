@@ -16,7 +16,7 @@ const RightHeaderButtons = ({ folder, showModal })=>(
     <View style={{flexDirection: "row"}}>
         { folder ? <TouchableOpacity
         style={{marginRight: 10}}
-        onPress={ ()=>{console.log("remove from folder");} }>
+        onPress={ ()=>{ showModal(); console.log("remove from folder");} }>
             <MaterialCommunityIcons 
             name="folder-remove" 
             size={24} 
@@ -60,6 +60,25 @@ const FolderModal = ({ visible, hideModal, text, handleText, handleModal  })=> (
         </Portal>
 );
 
+const ConfirmModal = ({ visible, hideModal, text, handleModal })=>(
+    <Portal>
+        <Modal 
+        visible={visible} 
+        onDismiss={hideModal} 
+        contentContainerStyle={ styles.modalConatiner }>
+        <Text style={{margin: 10}}>
+            {text}    
+        </Text>
+        <Button
+        style={{marginTop: 15}}
+        mode="contained" 
+        color="#60c1eb" 
+        onPress={ handleModal }>
+            Ok
+        </Button>
+        </Modal>
+        </Portal>
+);
 
 export default function AllPrescription({navigation, route}) {
     const [visible, setVisible] = useState(false);
@@ -108,7 +127,7 @@ export default function AllPrescription({navigation, route}) {
                 title: "",
                 headerRight: ()=>(
                     <RightHeaderButtons 
-                    folder={route.params.folder}
+                    folder={ route.params.folder }
                     showModal={ showModal } />
                 )
             } 
@@ -121,12 +140,17 @@ export default function AllPrescription({navigation, route}) {
 
     return (
         <Pressable onPress={ deSelect } style={styles.container} >
-            <FolderModal 
+            { route.params.folder ? <ConfirmModal 
+            visible={visible}
+            hideModal={hideModal}
+            text={"These Items will be removed"}
+            handleModal={handleModal}
+            /> : <FolderModal 
             visible={visible} 
             hideModal={hideModal} 
             text={text} 
             handleText={handleText}
-            handleModal={handleModal}/>
+            handleModal={handleModal}/> }
             <FlatList
             showsVerticalScrollIndicator={false}
             data={ dummyData }
