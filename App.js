@@ -61,7 +61,6 @@ export default function App() {
       let userToken = null;
       if( healthId === '1234' && password === '1234') {
         userToken = 'abcdef';
-        setLoginStatus(true);
         try {
           await AsyncStorage.setItem('userToken' , userToken);
         } catch(e) {
