@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, FlatList, TouchableOpacity, Pressable, Button } from 'react-native'
-import { Button as PaperButton } from 'react-native-paper';
+import {StyleSheet, View, FlatList, TouchableOpacity, Pressable, Text } from 'react-native'
+import { Modal, Portal, TextInput, Button } from 'react-native-paper';
 import { FontAwesome, Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
 import FlatListItem from '../../Components/Patient/ListItem';
 
@@ -12,11 +12,11 @@ const dummyData = [...Array(15).keys()].map((v, k)=>({
 }));
 
 // options for long press multi select
-const RightHeaderButtons = ({ folder })=>(
+const RightHeaderButtons = ({ folder, showModal })=>(
     <View style={{flexDirection: "row"}}>
         { folder ? <TouchableOpacity
         style={{marginRight: 10}}
-        onPress={ ()=>{console.log("remove from folder");} }>
+        onPress={ ()=>{ showModal(); console.log("remove from folder");} }>
             <MaterialCommunityIcons 
             name="folder-remove" 
             size={24} 
@@ -25,7 +25,7 @@ const RightHeaderButtons = ({ folder })=>(
         <>
             <TouchableOpacity 
             style={{marginRight: 20}} 
-            onPress={()=>{console.log("add to folder"); }}>
+            onPress={()=>{ showModal(); console.log("add to folder"); }}>
                 <Foundation name="folder-add" size={24} color="black" /> 
             </TouchableOpacity >
             <TouchableOpacity 
@@ -36,11 +36,61 @@ const RightHeaderButtons = ({ folder })=>(
         </>
         }
     </View>
-)
+);
 
+const FolderModal = ({ visible, hideModal, text, handleText, handleModal  })=> (
+        <Portal>
+            <Modal 
+            visible={visible} 
+            onDismiss={hideModal} 
+            contentContainerStyle={ styles.modalConatiner }>
+            <TextInput
+            label="Folder Name"
+            value={text}
+            onChangeText={ handleText }
+            />
+            <Button
+            style={{marginTop: 15}}
+            mode="contained" 
+            color="#60c1eb" 
+            onPress={ handleModal }>
+                Ok
+            </Button>
+            </Modal>
+        </Portal>
+);
+
+const ConfirmModal = ({ visible, hideModal, text, handleModal })=>(
+    <Portal>
+        <Modal 
+        visible={visible} 
+        onDismiss={hideModal} 
+        contentContainerStyle={ styles.modalConatiner }>
+        <Text style={{margin: 10}}>
+            {text}    
+        </Text>
+        <Button
+        style={{marginTop: 15}}
+        mode="contained" 
+        color="#60c1eb" 
+        onPress={ handleModal }>
+            Ok
+        </Button>
+        </Modal>
+        </Portal>
+);
 
 export default function AllPrescription({navigation, route}) {
+    const [visible, setVisible] = useState(false);
+    const [text, setText] = useState('');
     const [selectedItems, setSelectedItems] = useState([]); //kep only ids
+
+    const handleText = (text)=>{
+        setText(text);
+    }
+
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
     
     const handleLongPress = (item)=>{
         selectItems(item);
@@ -76,14 +126,31 @@ export default function AllPrescription({navigation, route}) {
             {
                 title: "",
                 headerRight: ()=>(
-                    <RightHeaderButtons folder={route.params.folder} />
+                    <RightHeaderButtons 
+                    folder={ route.params.folder }
+                    showModal={ showModal } />
                 )
             } 
         );
     };
+    const handleModal = () => {
+        hideModal(); 
+        deSelect();
+    }
 
     return (
         <Pressable onPress={ deSelect } style={styles.container} >
+            { route.params.folder ? <ConfirmModal 
+            visible={visible}
+            hideModal={hideModal}
+            text={"These Items will be removed"}
+            handleModal={handleModal}
+            /> : <FolderModal 
+            visible={visible} 
+            hideModal={hideModal} 
+            text={text} 
+            handleText={handleText}
+            handleModal={handleModal}/> }
             <FlatList
             showsVerticalScrollIndicator={false}
             data={ dummyData }
@@ -108,5 +175,11 @@ const styles = StyleSheet.create({
     },
     compactView : {
         height: 80
+    },
+    modalConatiner: {
+        backgroundColor: 'white', 
+        padding: 10,
+        margin: 20,
+        borderRadius: 5
     }
 });
