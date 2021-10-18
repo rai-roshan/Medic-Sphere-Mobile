@@ -10,10 +10,12 @@ export default function FlatListItem ({ item, handleLongPress, handleOnPress, is
         onLongPress={ ()=>{ handleLongPress(item); } }>
         { isSelected(item) ? <View style={ { marginBottom: 5 } }>
                 <CompactCard 
+                data={item}
                 backgroundColor="#b0b0b0" /> 
             </View> :
             <View style={ { marginBottom: 5 } }>
                 <CompactCard 
+                data={item}
                 backgroundColor="#e6e6e6"  />
             </View> 
         }

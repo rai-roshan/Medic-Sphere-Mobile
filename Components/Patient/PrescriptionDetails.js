@@ -1,23 +1,25 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import {Card, Title, Paragraph } from 'react-native-paper';
 
 const screenWidth = Dimensions.get("window").width;
 
-export default function PrescriptionDetails () {
-    
+export default function PrescriptionDetails ({ data }) {
+    console.log(data);
     return (
         <View style={ styles.container }>
             <Card style={ {...styles.blockCard, marginBottom: 10} }>
                 <Card.Content>
-                <Title>Doctor Detail</Title>
-                <Paragraph>Card content</Paragraph>
+                <Title>Doctor</Title>
+                <Text>{`Dr ${data.drName}`}</Text>
+                <Text>{`Doctor Id: XXXXXXXXXXX`}</Text>
                 </Card.Content>
             </Card>
             <Card style={ {...styles.blockCard, marginBottom: 10} }>
                 <Card.Content>
-                <Title>Pharmacy store detail</Title>
-                <Paragraph>Card content</Paragraph>
+                <Title>Pharmacy</Title>
+                <Paragraph>Reliance Pharmacy</Paragraph>
+                <Text>{`Pharmacy Licence: XXXXXXXXXXX`}</Text>
                 </Card.Content>
             </Card>
         </View>
