@@ -1,19 +1,30 @@
 import React from 'react';
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
-import {Card } from 'react-native-paper';
+import {Card, Paragraph } from 'react-native-paper';
 
-export default function PrescriptionCard() {
-    const screenWidth = Dimensions.get("window").width;
+const screenWidth = Dimensions.get("window").width;
+
+export default function PrescriptionCard({ data }) {
+    
     return (
         <Card style={ { flex: 1, width: screenWidth-20 } }>
             <Card.Content style={ styles.cardContent }>
                 <View style={ styles.previewCardTitle } >
                     <View>
-                        <Text style={styles.primaryText}>By:  Dr xyz khanra</Text>
+                        <Text style={styles.primaryText}>{`By: Dr ${data.drName}`}</Text>
                     </View>
-                    <View>
-                        <Text style={styles.secondaryText}>dd|mm|yyyy</Text>
+                    <View >
+                        <Text style={styles.secondaryText}>{data.date}</Text>
                     </View>
+                </View>
+                <View style={{ marginTop: 10  }}>
+                    { data.presecriptionData.map( (point, index) => (
+                        <Text 
+                        key={`point${index}`}
+                        style={{color: "#808080"}} >
+                            {point}
+                        </Text>
+                    ))}
                 </View>
             </Card.Content>
         </Card>  
@@ -26,12 +37,12 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5,
         backgroundColor: "#ebebeb",
-        minWidth: 90
+        width: screenWidth-30
     },
     previewCardTitle: {
-        flex: 1,
         flexDirection: "row",
         justifyContent: "space-between",
+        //backgroundColor: "green"
     },
     primaryText: {
         fontSize: 16,

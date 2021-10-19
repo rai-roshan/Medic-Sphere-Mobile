@@ -17,10 +17,47 @@ import { AuthContext } from "../../Context/AuthContext";
 
 const dummyData = [...Array(15).keys()].map((v, k)=>({
     id: 'key'+k,
-    dr_name: "Dr xyz khanra",
-    date: "dd|mm|yyyy",
-    hospital_name: "Hospital Name"
+    folderName: "Folder "+(v+1),
 }));
+
+const dummyRecentData = [
+    {
+        id: "recent1",
+        drName: "Kunal Khanra",
+        date: "12|10|2021",
+        presecriptionData : [
+            "some medicine A",
+            "lizid L",
+            "Pills 64x",
+            "Table zoom",
+            "some medice B"
+        ]
+    },
+    {
+        id: "recent2",
+        drName: "Deepak Tiwari",
+        date: "12|10|2021",
+        presecriptionData : [
+            "some medicine A",
+            "lizid L",
+            "Pills 64x",
+            "Table zoom",
+            "some medice B"
+        ]
+    },
+    {
+        id: "recent3",
+        drName: "Roshan Rai",
+        date: "12|10|2021",
+        presecriptionData : [
+            "some medicine A",
+            "lizid L",
+            "Pills 64x",
+            "Table zoom",
+            "some medice B"
+        ]
+    }
+];
 
 export default function PatientHome({ navigation }) {
 
@@ -50,15 +87,16 @@ export default function PatientHome({ navigation }) {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled={true}>
-                    <TouchableOpacity onPress={ ()=>{ navigation.navigate('PatientPrescrition'); } } >
-                        <PreviewCard/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={ ()=>{ navigation.navigate('PatientPrescrition'); } } >
-                        <PreviewCard/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={ ()=>{ navigation.navigate('PatientPrescrition'); } } >
-                        <PreviewCard/>
-                    </TouchableOpacity>
+                    {
+                        dummyRecentData.map( item=>(
+                            <TouchableOpacity
+                            key={item.id} 
+                            onPress={ ()=>{ navigation.navigate('PatientPrescrition', item ); } } >
+                            <PreviewCard
+                            data={item} />
+                        </TouchableOpacity>
+                        ))
+                    }
                 </ScrollView>
                 </View>     
             </View>
@@ -101,7 +139,7 @@ export default function PatientHome({ navigation }) {
                     style={{margin: 10}}
                     onPress={()=>{ navigation.navigate('AllPrescription', {
                         folder: true } ); }} >
-                        <Folder/>
+                        <Folder name={item.folderName} />
                     </TouchableOpacity>
                  ) }
                 numColumns={2}
@@ -109,13 +147,6 @@ export default function PatientHome({ navigation }) {
                 </FlatList>
                 </View>
             </View>
-
-            {/* <Button
-                style={ styles.m10 }
-                onPress = {() => signOut()}
-            >
-                Log out TempoRary   
-            </Button> */}
         </View>
     );
 }
